@@ -11,7 +11,8 @@ def plantillas():
     plantilla_home = home / ".vim" / "Plantillas"
     vimrc = actual / "Plantillas" / "vimrc"
     vimrc_home = home / ".vimrc"
-    
+    plantilla_home.parent.mkdir(parents=True, exist_ok=True)
+
     if plantilla_home.exists() and plantilla_home.is_symlink():
         print('Plantillas activas')
     else:
