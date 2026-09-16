@@ -21,26 +21,30 @@ def config():
         print('Enlace creado')
         print('Plantillas creadas')
 
-def plantillas(vim, archivo):
-    plantilla = archivo / "plantilla.tex"
-    comando = f'autocmd BufNewFile *.tex 0r {plantilla}\n'
+def plantillas(vim, ruta):
+    archivos = []
+    with open(vim, 'r', encoding='utf-8') as a:
+        contenido = a.read()
 
-    with open(vim, 'r', encoding='utf-8') as i:
-        contenido = i.read()
-
-    if not comando in contenido:
-        with open(vim, 'a', encoding='utf-8') as i:
-            i.write(comando)
+    for x in ruta.iterdir():
+        if x.is_file():
+            archivos.append((x, x.suffix))
+    for x,y in archivos:
+        if not 'vimrc' in str(x):
+            comando = f'autocmd BufNewFile *{y} 0r {x}\n'
+            if not comando in contenido:
+                with open(vim, 'a', encoding='utf-8') as a:
+                    a.write(comando)
 
 def comandos(vim):
-    c_latex = f'autocmd BufNewFile,BufRead *.tex nnoremap <buffer> <C-b> :w <CR> :!pdflatex % <CR>:!rm -f %:r.log %:r.aux %:r.toc %:r.out <CR>\n'
+    c_latex = f'autocmd BufNewFile,BufRead *.tex nnoremap <buffer> <C-b> :w<CR> :silent !pdflatex % && rm -f %:r.log %:r.aux %:r.toc %:r.out <CR>:redraw!<CR>\n'
     
-    with open(vim, 'r', encoding='utf-8') as i:
-        contenido = i.read()
+    with open(vim, 'r', encoding='utf-8') as a:
+        contenido = a.read()
 
     if not c_latex in contenido:
-        with open(vim, 'a', encoding='utf-8') as i:
-            i.write(c_latex)
+        with open(vim, 'a', encoding='utf-8') as a:
+            a.write(c_latex)
 
 print(f'Sistema operativo: {sistema}')
 config()
