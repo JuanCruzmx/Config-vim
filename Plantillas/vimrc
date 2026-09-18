@@ -7,5 +7,7 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
+autocmd BufNewFile *.c 0r /mnt/c/Users/juanc/Desktop/JuanCruz/Git/Config-Vim/Plantillas/plantilla.c
 autocmd BufNewFile *.tex 0r /mnt/c/Users/juanc/Desktop/JuanCruz/Git/Config-Vim/Plantillas/plantilla.tex
-autocmd BufNewFile,BufRead *.tex nnoremap <C-b> :w<CR> :silent !pdflatex % && rm -f %:r.log %:r.aux %:r.toc %:r.out && open %:r.pdf<CR>:redraw!<CR>
+autocmd BufNewFile,BufRead *.tex nnoremap <C-b> :w<CR> :silent !pdflatex % && rm -f %:r.log %:r.aux %:r.toc %:r.out<CR> :redraw!<CR>
+autocmd BufNewFile,BufRead *.c nnoremap <C-b> :w<CR> :silent !gcc % -o %:r<CR> :redraw!<CR>

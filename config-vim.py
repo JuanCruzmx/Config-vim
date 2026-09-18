@@ -37,14 +37,16 @@ def plantillas(vim, ruta):
                     a.write(comando)
 
 def comandos(vim):
-    c_latex = f'autocmd BufNewFile,BufRead *.tex nnoremap <C-b> :w<CR> :silent !pdflatex % && rm -f %:r.log %:r.aux %:r.toc %:r.out && open %:r.pdf<CR>:redraw!<CR>\n'
+    c_latex = f'autocmd BufNewFile,BufRead *.tex nnoremap <C-b> :w<CR> :silent !pdflatex % && rm -f %:r.log %:r.aux %:r.toc %:r.out<CR> :redraw!<CR>\n'
+    c_c = f'autocmd BufNewFile,BufRead *.c nnoremap <C-b> :w<CR> :silent !gcc % -o %:r<CR> :redraw!<CR>\n'
     
     with open(vim, 'r', encoding='utf-8') as a:
         contenido = a.read()
 
-    if not c_latex in contenido:
+    if not (c_latex and c_c) in contenido:
         with open(vim, 'a', encoding='utf-8') as a:
             a.write(c_latex)
+            a.write(c_c)
 
 print(f'Sistema operativo: {sistema}')
 config()
