@@ -38,7 +38,7 @@ def plantillas(vimrc, ruta):
 
 def comandos(vimrc):
     c_latex = f'autocmd BufNewFile,BufRead *.tex nnoremap <C-b> :w<CR> :silent !pdflatex % && rm -f %:r.log %:r.aux %:r.toc %:r.out<CR> :redraw!<CR>\n'
-    c_c = f'autocmd BufNewFile,BufRead *.c nnoremap <C-b> :w<CR> :silent !gcc % -o %:r<CR> :redraw!<CR>\n'
+    c_c = f'autocmd BufNewFile,BufRead *.c nnoremap <C-b> :w<CR> :silent !gcc %<CR> :redraw!<CR>\n'
     
     with open(vimrc, 'r', encoding='utf-8') as a:
         contenido = a.read()
