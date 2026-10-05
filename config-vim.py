@@ -17,7 +17,7 @@ def config():
         print("Enlazado")
     else:
         vimrc_home.unlink(missing_ok=True)
-        vimrc_home.symlink_to(vim)
+        vimrc_home.symlink_to(vimrc)
         print("Enlace creado")
         print("Plantillas creadas")
 
