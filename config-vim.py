@@ -39,6 +39,7 @@ def plantillas(vimrc, ruta):
 def comandos(vimrc):
     c_latex = f"autocmd BufNewFile,BufRead *.tex nnoremap <C-b> :w<CR> :silent !pdflatex % && rm -f %:r.log %:r.aux %:r.toc %:r.out<CR> :redraw!<CR>\n"
     c_c = f"autocmd BufNewFile,BufRead *.c nnoremap <C-b> :w<CR> :silent !gcc %<CR> :redraw!<CR>\n"
+    c_cpp = f"autocmd BufNewFile,BufRead *.cpp nnoremap <C-b> :w<CR> :silent !g++ %<CR> :redraw!<CR>\n"
 
     with open(vimrc, "r", encoding="utf-8") as a:
         contenido = a.read()
@@ -48,6 +49,8 @@ def comandos(vimrc):
             a.write(c_latex)
         if c_c not in contenido:
             a.write(c_c)
+        if c_cpp not in contenido:
+            a.write(c_cpp)
 
 print(f"Sistema operativo: {sistema}")
 config()
